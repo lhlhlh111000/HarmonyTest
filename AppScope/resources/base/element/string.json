@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "FirstDemo"
+    },
+    {
+      "name": "internet_reason",
+      "value": "申请网络权限"
+    }
+  ]
+}
