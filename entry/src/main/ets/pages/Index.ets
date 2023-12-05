@@ -1,5 +1,5 @@
 import router from '@ohos.router'
-import { HttpRequest } from './HttpRequest'
+import { HttpRequest } from '../data/HttpRequest'
 @Entry
 @Component
 struct Index {
