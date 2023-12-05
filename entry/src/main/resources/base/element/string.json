@@ -11,6 +11,18 @@
     {
       "name": "EntryAbility_label",
       "value": "label"
+    },
+    {
+      "name": "bottom_text_home",
+      "value": "Home"
+    },
+    {
+      "name": "bottom_text_discover",
+      "value": "Discover"
+    },
+    {
+      "name": "bottom_text_mine",
+      "value": "Mine"
     }
   ]
 }
