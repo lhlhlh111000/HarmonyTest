@@ -1,5 +1,4 @@
 import { Constants } from '../common/Constants';
-import { HttpRequest } from '../data/HttpRequest';
 import { BottomTabsList } from '../model/BottomTabsItem';
 import { HomePage } from './home/Home';
 @Entry

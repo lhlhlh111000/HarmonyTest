@@ -1,6 +1,6 @@
 import http from '@ohos.net.http';
 import { Callback } from './Callback';
-import {Result, Banner} from '../model/Models';
+import {Response, Banner, PageResponse, Article} from '../model/Models';
 
 export class HttpRequest {
 
@@ -14,11 +14,15 @@ export class HttpRequest {
     return HttpRequest._instance;
   }
 
-  banner(callback: Callback<Result<Array<Banner>>>): void {
+  banner(callback: Callback<Response<Array<Banner>>>): void {
     this._get("https://www.wanandroid.com/banner/json", callback);
   }
 
-  private _get<T>(url: string, callback?: Callback<Result<T>>): void {
+  articles(callback: Callback<Response<PageResponse<Array<Article>>>>) {
+    this._get("https://www.wanandroid.com/article/list/1/json", callback);
+  }
+
+  private _get<T>(url: string, callback?: Callback<Response<T>>): void {
     let options = {
       usingCache: true,
       priority: 1,
@@ -42,7 +46,7 @@ export class HttpRequest {
             errorCode: data.responseCode
           });
         } else {
-          let result: Result<T> = JSON.parse(data.result as string);
+          let result: Response<T> = JSON.parse(data.result as string);
           if (result) {
             callback(result);
           } else {

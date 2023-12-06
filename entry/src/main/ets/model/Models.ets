@@ -1,10 +1,14 @@
-export interface Result<T> {
-
+export interface Response<T> {
   errorCode?: number;
-
   errorMsg?: string;
-
   data?: T;
+}
+
+export interface PageResponse<T> {
+  curPage: number;
+  datas: T;
+  total: number;
+  size: number;
 }
 
 export interface Banner {
@@ -16,4 +20,9 @@ export interface Banner {
   title?: string;
   type: number;
   url?: string;
+}
+
+export interface Article {
+  link: string,
+  title: string,
 }
