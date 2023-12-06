@@ -5,10 +5,6 @@ import { HttpRequest } from '../data/HttpRequest'
 struct Index {
   @State message: string = 'Hello World'
 
-  aboutToAppear() {
-    HttpRequest.getInstance().request();
-  }
-
   build() {
     Row() {
       Column() {

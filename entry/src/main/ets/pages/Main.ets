@@ -1,5 +1,7 @@
 import { Constants } from '../common/Constants';
+import { HttpRequest } from '../data/HttpRequest';
 import { BottomTabsList } from '../model/BottomTabsItem';
+import { HomePage } from './home/Home';
 @Entry
 @Component
 struct MainPage {
@@ -35,10 +37,7 @@ struct MainPage {
     Column() {
       Tabs({barPosition: BarPosition.End, controller: this.controller}) {
         TabContent() {
-          Column()
-            .width(Constants.FULL_PERCENT)
-            .height(Constants.FULL_PERCENT)
-            .backgroundColor(Color.Blue)
+          HomePage()
         }
         .tabBar(this.tabBuilder(0))
 

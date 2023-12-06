@@ -1,7 +1,10 @@
 import http from '@ohos.net.http';
+import { Callback } from './Callback';
+import {Result, Banner} from '../model/Models';
+
 export class HttpRequest {
 
-  static _instance: HttpRequest;
+  private static _instance: HttpRequest;
 
   static getInstance(): HttpRequest {
     if (HttpRequest._instance == null) {
@@ -11,28 +14,51 @@ export class HttpRequest {
     return HttpRequest._instance;
   }
 
-  options = {
-    usingCache: true,
-    priority: 1,
-    connectTimeout: 6000,
-    readTimeout: 6000
-  };
-
-  httpRequest = http.createHttp();
-
-  banner() {
-    this.httpRequest.request("https://www.wanandroid.com/banner/json", this.options, (err, data) => {
-    })
+  banner(callback: Callback<Result<Array<Banner>>>): void {
+    this._get("https://www.wanandroid.com/banner/json", callback);
   }
 
-  request() {
-    this.httpRequest.request("https://www.wanandroid.com/article/list/1/json", this.options, (err, data) => {
+  private _get<T>(url: string, callback?: Callback<Result<T>>): void {
+    let options = {
+      usingCache: true,
+      priority: 1,
+      connectTimeout: 6000,
+      readTimeout: 6000
+    } as http.HttpRequestOptions;
+
+    let httpRequest = http.createHttp();
+
+    if (!callback) {
+      callback = (data) => {
+        // empty callback
+      };
+    }
+
+    httpRequest.request(url, options, (err, data) => {
       if (!err) {
-        console.info("Result: " + JSON.stringify(data.result));
-        console.info("code: " + JSON.stringify(data.responseCode));
+        if (data.resultType != http.HttpDataType.STRING) {
+          callback({
+            errorMsg: 'Invalid data type.',
+            errorCode: data.responseCode
+          });
+        } else {
+          let result: Result<T> = JSON.parse(data.result as string);
+          if (result) {
+            callback(result);
+          } else {
+            callback({
+              errorMsg: 'Json format error.',
+              errorCode: data.responseCode
+            });
+          }
+        }
       } else {
-        console.info("error: " + JSON.stringify(err));
+        callback({
+          errorMsg: err.message
+        });
       }
-    })
+
+      httpRequest.destroy();
+    });
   }
 }
