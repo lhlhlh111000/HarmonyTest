@@ -23,6 +23,10 @@
     {
       "name": "bottom_text_mine",
       "value": "我的"
+    },
+    {
+      "name": "detail",
+      "value": "详情"
     }
   ]
 }

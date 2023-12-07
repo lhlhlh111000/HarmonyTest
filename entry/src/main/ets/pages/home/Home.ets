@@ -1,3 +1,4 @@
+import router from '@ohos.router';
 import { Constants } from '../../common/Constants';
 import { HttpRequest } from '../../data/HttpRequest';
 import { ADataSource } from '../../model/ADataSource';
@@ -31,6 +32,9 @@ export struct HomePage {
             Image(item.imagePath)
               .width(Constants.FULL_PERCENT)
               .height(160)
+              .onClick(() => {
+                this._gotoDetail(item.url);
+              })
           }, (item: Banner) => {
             return item.id.toString();
           });
@@ -53,6 +57,9 @@ export struct HomePage {
               .width(Constants.FULL_PERCENT)
               .height(72)
           }
+          .onClick(() => {
+            this._gotoDetail(item.link);
+          })
         }, (item: Article) => item.title)
       }
       .width(Constants.FULL_PERCENT)
@@ -60,5 +67,9 @@ export struct HomePage {
     }
     .height(Constants.FULL_PERCENT)
     .width(Constants.FULL_PERCENT)
+  }
+
+  _gotoDetail(url: string) : void {
+    router.pushUrl({url: 'pages/web/Web', params: {'url': url}});
   }
 }
