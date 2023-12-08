@@ -19,6 +19,7 @@ static napi_value Add(napi_env env, napi_callback_info info)
     return sum;
 }
 
+EXTERN_C_START
 static napi_value Init(napi_env env, napi_value exports)
 {
     napi_property_descriptor desc[] = {
@@ -28,6 +29,7 @@ static napi_value Init(napi_env env, napi_value exports)
     napi_define_properties(env, exports, sizeof(desc)/ sizeof(desc[0]), desc);
     return exports;
 }
+EXTERN_C_END
 
 static napi_module demoModule = {
     .nm_version = 1,
