@@ -1,5 +1,6 @@
 import { Constants } from '../common/Constants';
 import { BottomTabsList } from '../model/BottomTabsItem';
+import { DiscoverPage } from './discover/Discover';
 import { HomePage } from './home/Home';
 @Entry
 @Component
@@ -41,10 +42,7 @@ struct MainPage {
         .tabBar(this.tabBuilder(0))
 
         TabContent() {
-          Column()
-            .width(Constants.FULL_PERCENT)
-            .height(Constants.FULL_PERCENT)
-            .backgroundColor(Color.Yellow)
+          DiscoverPage()
         }
         .tabBar(this.tabBuilder(1))
 
